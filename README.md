@@ -1,4 +1,4 @@
-# Ziegler et al. (2019) replication
+# My replication project
 
 This directory contains all my project files.
 

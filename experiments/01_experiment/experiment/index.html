@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Title of This Experiment</title>
+    <title>Language Study</title>
 
     <!--JS-->
 
@@ -48,9 +48,30 @@ $(function(){
 <body onload="init();">
   <noscript>This task requires JavaScript.</noscript>
 
+<div class="slide" id="bot">
+  <h3>Are you a bot?</h3>
+  <p id="s"></p>
+  <p id="q"></p>
+  <input type="text" id="text_box"/>
+  <br><br><br>
+  <div class="err_msg" id="err1">
+    <p2>Failing this question two more times will disqualify you from this study.</p2>
+  </div>
+  <div class="err_msg" id="err2">
+    <p2>Failing this question one more time will disqualify you from this study.</p2>
+  </div>
+  <div class="err_msg" id="disq">
+    <p2>You failed the question and you are disqualified.</p2>
+  </div>
+  <div class="button">
+    <button onclick="_s.button()">Continue</button>
+  </div>
+</div>
+
+
   <div class="slide" id="i0" >
     <p id="cocolab">Stanford Linguistics</p>
-    <p id="instruct-text">You will see some stuff and be asked some questions. The HIT should take ~2 minutes. Please pay attention, thanks!</p>
+    <p id="instruct-text">You will see some sentences and pictures, and be asked to type the sentence, describe the picture, or say whether you have seen the sentence or picture before. The HIT should take ~30 minutes. Please pay attention. Thanks!</p>
     <button id="start_button" type="button">Start Experiment</button>
     <br>
     <i><small><small><strong><br>LEGAL INFORMATION</strong>:<br><br>We invite you to participate in a research study on language production and comprehension.<br>Your experimenter will ask you to do a linguistic task such as reading sentences or words, naming pictures or describing scenes, making up sentences of your own, or participating in a simple language game.<br><br>You will be paid for your participation at the posted rate.<br><br>There are no risks or benefits of any kind involved in this study.<br><br>If you have read this form and have decided to participate in this experiment, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. You have the right to refuse to do particular tasks. Your individual privacy will be maintained in all published and written data resulting from the study.<br>You may print this form for your records.<br><br>CONTACT INFORMATION:<br>If you have any questions, concerns or complaints about this research study, its procedures, risks and benefits, you should contact the Protocol Director Meghan Sumner at <br>(650)-725-9336<br><br>If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906. You can also write to the Stanford IRB, Stanford University, 3000 El Camino Real, Five Palo Alto Square, 4th Floor, Palo Alto, CA 94306 USA.<br><br>If you agree to participate, please proceed to the study tasks.<br><br></small></small></i>
@@ -62,7 +83,25 @@ Otherwise, modified to whatever is required for you given your affiliation.
 
 <div class="slide" id="instructions">
   <h3>Instructions</h3>
-  <p>Here are some instructions.</p>
+  <p style="text-align:left; font-size:18px;"> In this experiment, you will see sentences and pictures. Some of the sentences and pictures occur more than once. You will have <strong>three tasks</strong>. </p> 
+  <p style="text-align:left; font-size:18px;"> <strong>First</strong>, if you see a sentence, please type the <strong>exact same sentence</strong> in the text box.</p>
+  <p style="text-align:left; font-size:18px;"> <strong>Second</strong>, if you see a picture, please type in the text box a sentence that describes the picture. Three things are important:
+    <ol type="a" style="text-align:left; font-size:18px;">
+      <li> that you <strong>use only one sentence</strong>; </li>
+      <li> that you <strong>describe each and every character in the scene</strong>, and that you describe the scene <strong>as accurately as possible</strong>; </li>
+      <li> that you <strong>do not use pronouns (<i>he</i>, <i>she</i>, <i>it</i>, <i>they</i>, etc.)</strong>. Always say "the man", "the girl", "the teacher", etc. </li>
+    </ol>
+  </p>
+  <p style="text-align:left; font-size:18px;"> You can see an example of the picture task below.</p> 
+  <p id="practice_instr" style="font-size:16px">In the text box below, type a sentence that describes the picture. </p>
+    <img id="practice_picture" height="400" src="pictures/P1.jpg"></img>
+    <br>
+    <input type="text" id="practice_response" size="50"></input>
+    <div class="practice_err_text" style="color:red; font-size:16px">Please type a sentence describing the picture.</div>
+  <p style="text-align:left; font-size:18px;"> Your <strong>third task</strong> is to decide whether you have seen each sentence or picture before. When you see an item for the first time, click "No"; when you see it for the second time, click "Yes". </p>
+  <p style="text-align:left; font-size:18px;">  It is absolutely important that you <strong>take your time</strong> while doing this task. If you rush along and don't pay attention, thus inadequately describing the pictures, you will have more wrong responses. </p>
+  <p style="text-align:left; font-size:18px;"> Continue answering all questions until you have completed the experiment. </p>
+  <p style="text-align:left; font-size:18px;"> Click "Continue" below to continue.</p>
   <button onclick="_s.button()">Continue</button>
 </div>
 
@@ -71,7 +110,7 @@ Otherwise, modified to whatever is required for you given your affiliation.
   <div id="sentence_trial">
   	<p id="sentence_instr">Type the following sentence in the text box below. </p>
   	<p class="sentence_prompt"></p>   <!-- what is this doing?-->
-  	<input type="text" id="sentence_response" size="50"></input>
+  	<input type="text" id="sentence_response" size="100"></input>
   	<div class="sentence_err_text" style="color:red">Please type the sentence in the text box.</div>
     <p id="seen_sentence_before"> Have you seen this sentence before? </p>
     <label><input type="radio" name="sentence_seen" value="No"/>No</label>
@@ -82,8 +121,10 @@ Otherwise, modified to whatever is required for you given your affiliation.
     <button onclick="_s.second_slide()">Continue</button>
   </div>
   <div id="picture_trial">
-    <p id="picture_instr">Type a sentence that describes the picture in the text box below. </p>
+    <p id="picture_instr">In the text box below, type a sentence that describes the picture. </p>
     <p class="picture_prompt"></p>
+    <img id="target_picture" height="400"></img>
+    <br>
     <input type="text" id="picture_response" size="50"></input>
     <div class="picture_err_text" style="color:red">Please type a sentence describing the picture.</div>
     <p id="seen_picture_before"> Have you seen this picture before? </p>

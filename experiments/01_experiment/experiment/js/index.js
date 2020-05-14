@@ -62,12 +62,19 @@ button: function () {
     },
     button : function() {
       practice_text_response = $("#practice_response").val();
-      if (practice_text_response.length == 0) {
+      if (practice_text_response.length < 5) {
         $(".practice_err_text").show();
       } else {
         exp.practice_trial = practice_text_response; 
         exp.go(); //use exp.go() if and only if there is no "present" data.
       }
+    }
+  });
+
+  slides.instructions2 = slide({
+    name: "instructions2",
+    button: function() {
+      exp.go();
     }
   });
 
@@ -99,7 +106,7 @@ button: function () {
     second_slide : function() {
       exp.sent_text_response = $("#sentence_response").val();
       exp.sent_button_response = $('input[name="sentence_seen"]:checked').val();
-      if (exp.sent_text_response.length == 0) {
+      if (exp.sent_text_response.length < 5) {
         $(".sentence_err_text").show();
       } else if (exp.sent_button_response == null)  {
         $(".sentence_err_button").show();
@@ -114,7 +121,7 @@ button: function () {
     button : function() {
       pic_text_response = $("#picture_response").val();
       pic_button_response = $('input[name="picture_seen"]:checked').val();
-      if (pic_text_response.length == 0) {
+      if (pic_text_response.length < 5) {
         $(".picture_err_text").show();
       } else if(pic_button_response == null) {
         $(".picture_err_button").show();
@@ -179,6 +186,13 @@ button: function () {
 
 /// init ///
 function init() {
+   $(document).ready(function(){
+   var ut_id = "epetsen-ziegleretal2019replication";
+   if (UTWorkerLimitReached(ut_id)) {
+     $(".slide").hide();
+     $("body").html("You have already completed the maximum number of HITs allowed by this requester. Please click 'Return HIT' to avoid any impact on your approval rating.");
+}});
+
   exp.trials = [];
   exp.catch_trials = [];
   exp.condition = _.sample(["passive", "by-locative", "non-by-locative"]); //can randomize between subject conditions here
@@ -393,6 +407,24 @@ for (item_entry of filler_sentences) {
 
 filler_stims = _.shuffle(filler_stims);
 
+//length
+var sentences_length = [];
+for (item of items) {
+  var l = item.sentence.length;
+  sentences_length.push(l);
+}
+
+//console.log(sentences_length);
+//console.log(Math.min(...sentences_length));
+
+for (stim of filler_sentences) {
+  var l = stim.sentence.length;
+  sentences_length.push(l);
+}
+
+console.log(sentences_length);
+console.log(Math.min(...sentences_length));
+
 //five_fillers = filler_stims.splice(0, 5);
 
 //another file 
@@ -431,7 +463,7 @@ console.log(exp.stims);
       screenUW: exp.width
     };
   //blocks of the experiment:
-  exp.structure=["bot", "i0", "instructions", "trial", 'subj_info', 'thanks'];
+  exp.structure=["bot", "i0", "instructions", "instructions2", "trial", 'subj_info', 'thanks'];
 
   exp.data_trials = [];
   //make corresponding slides:

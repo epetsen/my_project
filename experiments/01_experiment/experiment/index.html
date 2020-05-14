@@ -3,6 +3,8 @@
 <head>
     <title>Language Study</title>
 
+    <script src="shared/js/uniqueturker.js"></script>
+    
     <!--JS-->
 
     <!-- external general utilities -->
@@ -94,14 +96,23 @@ Otherwise, modified to whatever is required for you given your affiliation.
   </p>
   <p style="text-align:left; font-size:18px;"> You can see an example of the picture task below.</p> 
   <p id="practice_instr" style="font-size:16px">In the text box below, type a sentence that describes the picture. </p>
-    <img id="practice_picture" height="400" src="pictures/P1.jpg"></img>
+    <img id="practice_picture" height="275" src="pictures/P1.jpg"></img>
     <br>
     <input type="text" id="practice_response" size="50"></input>
     <div class="practice_err_text" style="color:red; font-size:16px">Please type a sentence describing the picture.</div>
+  <!--<p style="text-align:left; font-size:18px;"> Your <strong>third task</strong> is to decide whether you have seen each sentence or picture before. When you see an item for the first time, click "No"; when you see it for the second time, click "Yes". </p>
+  <p style="text-align:left; font-size:18px;">  It is absolutely important that you <strong>take your time</strong> while doing this task. If you rush along and don't pay attention, thus inadequately describing the pictures, you will have more wrong responses. </p>
+  <p style="text-align:left; font-size:18px;"> Continue answering all questions until you have completed the experiment. </p>
+  <p style="text-align:left; font-size:18px;"> Click "Continue" below to continue.</p>-->
+  <br><br>
+  <button onclick="_s.button()">Continue</button>
+</div>
+
+<div class="slide" id="instructions2">
   <p style="text-align:left; font-size:18px;"> Your <strong>third task</strong> is to decide whether you have seen each sentence or picture before. When you see an item for the first time, click "No"; when you see it for the second time, click "Yes". </p>
   <p style="text-align:left; font-size:18px;">  It is absolutely important that you <strong>take your time</strong> while doing this task. If you rush along and don't pay attention, thus inadequately describing the pictures, you will have more wrong responses. </p>
   <p style="text-align:left; font-size:18px;"> Continue answering all questions until you have completed the experiment. </p>
-  <p style="text-align:left; font-size:18px;"> Click "Continue" below to continue.</p>
+  <!--<p style="text-align:left; font-size:18px;"> Click "Continue" below to continue.</p>-->
   <button onclick="_s.button()">Continue</button>
 </div>
 

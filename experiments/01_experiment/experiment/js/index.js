@@ -417,13 +417,13 @@ for (item of items) {
 //console.log(sentences_length);
 //console.log(Math.min(...sentences_length));
 
-for (stim of filler_sentences) {
-  var l = stim.sentence.length;
-  sentences_length.push(l);
-}
+//for (stim of filler_sentences) {
+ // var l = stim.sentence.length;
+  //sentences_length.push(l);
+//}
 
-console.log(sentences_length);
-console.log(Math.min(...sentences_length));
+//console.log(sentences_length);
+//console.log(Math.min(...sentences_length));
 
 //five_fillers = filler_stims.splice(0, 5);
 
